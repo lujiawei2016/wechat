@@ -13,7 +13,7 @@ public class Score {
 
 	private int scoreId;
 	
-	private int studentId;                // 学生id
+	private String studentId;                // 学生id
 	
 	private String title;                 // 标题
 	
@@ -38,12 +38,12 @@ public class Score {
 	public void setScoreId(int scoreId) {
 		this.scoreId = scoreId;
 	}
-
-	public int getStudentId() {
+	
+	public String getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 

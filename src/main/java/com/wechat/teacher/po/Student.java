@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class Student {
 
-	private int studentId;                // 主键
+	private String studentId;                // 主键
 	
 	private String name;                  // 学生名
 	
@@ -21,11 +21,11 @@ public class Student {
 	
 	private Date createTime;              // 创建时间
 
-	public int getStudentId() {
+	public String getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(int studentId) {
+	public void setStudentId(String studentId) {
 		this.studentId = studentId;
 	}
 

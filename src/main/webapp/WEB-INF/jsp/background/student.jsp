@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="${ctx}/static/AdminLTE-2.3.0/dist/css/skins/skin-blue.min.css">
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
+  <input type="hidden" id="path" value="${ctx}">
     <div class="wrapper">
 
       <header class="main-header">
@@ -229,7 +230,8 @@
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-sm btn-default" id="singleAdd"><i class="fa fa-plus"></i> 添加单条</button>
+                        <button class="btn btn-sm btn-default" id="batchAdd"><i class="fa fa-plus-circle"></i> 批量添加</button>
                       </div>
                     </div>
                   </div>
@@ -331,15 +333,47 @@
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
+    
+<!-- 批量模态框（Modal） -->
+<div class="modal fade" id="batchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					批量添加学生信息
+				</h4>
+			</div>
+			<div class="modal-body">
+				<form action="" id="uploadFrom">
+					<input type="file" name="file" id="file">
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="batchBtn">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
 
     <!-- REQUIRED JS SCRIPTS -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="${ctx}/static/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-migrate-1.2.1.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="${ctx}/static/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/AdminLTE-2.3.0/bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="${ctx}/static/AdminLTE-2.3.0/dist/js/app.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/AdminLTE-2.3.0/dist/js/app.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/layer/layer.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery.form.js"></script>
+    <script type="text/javascript" src="${ctx}/static/student/student.js"></script>
 
   </body>
 </html>
