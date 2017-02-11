@@ -43,9 +43,6 @@ public class ImportExcelUtil {
             sheet = work.getSheetAt(i);  
             if(sheet==null){continue;}
             
-            System.out.println("第一行"+sheet.getFirstRowNum());
-            System.out.println("最后一行"+sheet.getLastRowNum());
-            
             //遍历当前sheet中的所有行  
             for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {  
                 row = sheet.getRow(j);  

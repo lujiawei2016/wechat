@@ -1,0 +1,27 @@
+.clear{
+	clear:both;
+}
+#file{
+	display: none
+}
+.contentDiv{
+	width: 150px;
+	height:150px;
+	border: 1px dashed #CCC;
+	margin-left: 200px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.selectExcel{
+	margin-left: 200px;
+	cursor: pointer;
+}
+.contentDiv:hover{
+	background: #EEE;
+}
+.selectImg{
+	margin: 50px;
+}
+.fileName{
+	text-align: center;
+}

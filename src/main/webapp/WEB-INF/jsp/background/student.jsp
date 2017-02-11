@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="${ctx}/static/AdminLTE-2.3.0/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="${ctx}/static/AdminLTE-2.3.0/dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="${ctx}/static/student/student.css">
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
   <input type="hidden" id="path" value="${ctx}">
@@ -238,20 +239,32 @@
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
-                    <tbody><tr>
-                      <th>ID</th>
-                      <th>User</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Reason</th>
-                    </tr>
+                    <tbody>
                     <tr>
-                      <td>183</td>
-                      <td>John Doe</td>
-                      <td>11-7-2014</td>
-                      <td><span class="label label-success">Approved</span></td>
-                      <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                      <th>学生id</th>
+                      <th>学生姓名</th>
+                      <th>电话号码</th>
+                      <th>是否绑定</th>
+                      <th>操作</th>
                     </tr>
+                    <c:forEach var="student" items="${studentList}">
+                    	<tr>
+	                      <td>${student.studentId}</td>
+	                      <td>${student.name}</td>
+	                      <td>${student.phone}</td>
+	                      <td>
+	                      	<c:choose>
+	                      		<c:when test="${student.weixin == '' || student.weixin eq null}">
+	                      			<span style="color: red">未绑定</span>
+	                      		</c:when>
+	                      		<c:otherwise>
+	                      			已绑定
+	                      		</c:otherwise>
+	                      	</c:choose>
+	                      </td>
+	                      <td>操作</td>
+	                    </tr>
+                    </c:forEach>
                   </tbody></table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -343,13 +356,20 @@
 					&times;
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					批量添加学生信息
+					选择文件
 				</h4>
 			</div>
 			<div class="modal-body">
 				<form action="" id="uploadFrom">
 					<input type="file" name="file" id="file">
 				</form>
+				<div class="contentDiv" id="contentDiv">
+					<img alt="选择excel" class="selectImg" src="${ctx}/static/student/images/add.png">
+				</div>
+				<img src="${ctx}/static/student/images/excel.jpg" class="selectExcel">
+				<p class="fileName"></p>
+				<a href="javascript:;">下载模板</a>
+				<div class="clear"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.teacher.dao.mapping.StudentDao">
+
+	<!-- 根据id查找学生 -->
+	<select id="findStudentById" parameterType="String" resultType="com.wechat.teacher.po.Student">
+		select * from student s where s.studentId=#{studentId}
+	</select>
+	
+	<!-- 查找所有学生 -->
+	<select id="findAllStudent" resultType="com.wechat.teacher.po.Student">
+		select * from student
+	</select>
+	
+	<!-- 保存学生信息 -->
+	<insert id="saveStudent" parameterType="com.wechat.teacher.po.Student">
+		insert into student(studentId,name,phone,createTime) values(#{studentId},#{name},#{phone},now())
+	</insert>
+	
+</mapper>

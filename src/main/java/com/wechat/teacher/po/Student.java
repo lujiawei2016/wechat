@@ -61,4 +61,15 @@ public class Student {
 		this.createTime = createTime;
 	}
 	
+	public Student() {
+		super();
+	}
+
+	public Student(String studentId, String name, String phone) {
+		super();
+		this.studentId = studentId;
+		this.name = name;
+		this.phone = phone;
+	}
+
 }

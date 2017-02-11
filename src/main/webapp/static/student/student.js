@@ -12,22 +12,45 @@ $(document).ready(function(){
 		if(checkData()){  
             $("#uploadFrom").ajaxSubmit({    
                 url:path+"/studentController/importStudent",  
-                dataType: "json",  
-                success: resutlMsg,  
-                error: errorMsg  
+                dataType: "json",
+                success: function(msg){  
+                	layer.alert("导入成功",{
+                		icon:1
+                	});  
+                },  
+                error: function(){
+                	("#batchModal").modal("hide");
+                	layer.alert("导入成功",{
+                		icon:1
+                	});
+                	setTimeout(function(){
+                		location.reaload();
+                	},2000);
+                }
             });   
-            function resutlMsg(msg){  
-            	layer.alert("导入成功",{
-            		icon:1
-            	});  
-            }  
-            function errorMsg(){   
-            	layer.alert("导入成功",{
-            		icon:1
-            	});
-            }  
         }  
 	});
+	
+	//点击选择excel
+	$(".selectImg").click(function(){
+		return $("#file").click();
+	});
+	
+	//选择文件的时候
+	$("#file").change(function(){
+		selectFile();
+	});
+	
+	//选择excel
+	$(".selectExcel").hide();
+	function selectFile(){
+		if(checkData()){
+			var fileName = $("#file").val();
+			$(".fileName").html(fileName);
+			$("#contentDiv").hide();
+			$(".selectExcel").show();			
+		}
+	}
 	
 	//JS校验form表单信息  
     function checkData(){  

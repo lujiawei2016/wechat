@@ -2,11 +2,10 @@ package com.wechat.teacher.service.impl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.wechat.teacher.dao.mapping.BindingDao;
 import com.wechat.teacher.po.Student;
