@@ -40,9 +40,9 @@ public class BindingController {
 		List<Student> studentList = new ArrayList<Student>();
 		try {
 			studentList = bindingService.findStudentByWeixin(weixin);
-			if(studentList.size() != 0){
+			if(studentList !=null && studentList.size() != 0){
 				//该微信号已经绑定了学生
-				
+				url = "redirect:/parentsController/findStudentByWeixin?weixin="+weixin+"";
 			}else{
 				//该微信号没有绑定学生
 				modelMap.put("weixin", weixin);

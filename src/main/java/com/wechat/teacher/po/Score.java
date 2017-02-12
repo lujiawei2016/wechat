@@ -13,7 +13,7 @@ public class Score {
 
 	private int scoreId;
 	
-	private String studentId;                // 学生id
+	private String studentId;             // 学生id
 	
 	private String title;                 // 标题
 	
@@ -109,6 +109,23 @@ public class Score {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public Score() {
+		super();
+	}
+
+	public Score(String studentId, String title, String china, String math, String english, String growthIntegral,
+			String active, String leader) {
+		super();
+		this.studentId = studentId;
+		this.title = title;
+		this.china = china;
+		this.math = math;
+		this.english = english;
+		this.growthIntegral = growthIntegral;
+		this.active = active;
+		this.leader = leader;
 	}
 	
 }

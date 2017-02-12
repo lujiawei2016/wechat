@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="${ctx}/static/AdminLTE-2.3.0/dist/css/AdminLTE.min.css">
     <link rel="stylesheet" href="${ctx}/static/AdminLTE-2.3.0/dist/css/skins/skin-blue.min.css">
-    <link rel="stylesheet" href="${ctx}/static/student/student.css">
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
   <input type="hidden" id="path" value="${ctx}">
@@ -208,8 +207,8 @@
             <li class="treeview active">
               <a href="javascript:;"><i class="fa fa-link"></i> <span>学生管理</span> <i class="fa fa-angle-left pull-right"></i></a>
               <ul class="treeview-menu">
-                <li class="active"><a href="${ctx}/studentController/listStudent">学生管理</a></li>
-                <li><a href="${ctx}/scoreController/listScoreTitle">成绩管理</a></li>
+                <li><a href="${ctx}/studentController/listStudent">学生管理</a></li>
+                <li class="active"><a href="${ctx}/scoreController/listScoreTitle">成绩管理</a></li>
               </ul>
             </li>
           </ul><!-- /.sidebar-menu -->
@@ -229,8 +228,8 @@
                   <div class="box-tools">
                     <div class="input-group" style="width: 150px;">
                       <div class="input-group-btn">
-                        <button class="btn btn-sm btn-default" id="singleAdd"><i class="fa fa-plus"></i> 添加单条</button>
-                        <button class="btn btn-sm btn-default" id="batchAdd"><i class="fa fa-plus-circle"></i> 批量添加</button>
+                        <!-- <button class="btn btn-sm btn-default" id="returnPrev"><i class="fa fa-mail-reply"></i> 返回</button> -->
+                        <a href="${ctx}/scoreController/listScoreTitle" class="btn btn-sm btn-default"><i class="fa fa-mail-reply"></i> 返回</a>
                       </div>
                     </div>
                   </div>
@@ -239,36 +238,25 @@
                   <table class="table table-hover">
                     <tbody>
                     <tr>
-                      <th>学生id</th>
-                      <th>学生姓名</th>
-                      <th>电话号码</th>
-                      <th>是否绑定</th>
-                      <th>操作</th>
+                      <th>学号</th>
+                      <th>标题</th>
+                      <th>语文</th>
+                      <th>数学</th>
+                      <th>英语</th>
+                      <th>成长积分</th>
+                      <th>活跃度</th>
+                      <th>班干部分数</th>
                     </tr>
-                    <c:forEach var="student" items="${studentList}">
-                    	<tr>
-	                      <td class="studentIdTd">${student.studentId}</td>
-	                      <td>${student.name}</td>
-	                      <td>${student.phone}</td>
-	                      <td>
-	                      	<c:choose>
-	                      		<c:when test="${empty student.weixin}">
-	                      			<span style="color: red">未绑定</span>
-	                      		</c:when>
-	                      		<c:otherwise>
-	                      			已绑定
-	                      		</c:otherwise>
-	                      	</c:choose>
-	                      </td>
-	                      <td>
-	                      	<c:choose>
-	                      		<c:when test="${!empty student.weixin}">
-	                      			<a href="javascript:;" class="unbundling">解绑</a>
-	                      		</c:when>
-	                      	</c:choose>
-	                      	<a href="javascript:;" class="delete">删除</a>
-	                      	<a href="javascript:;" class="lookScore">查看成绩</a>
-	                      </td>
+                    <c:forEach var="score" items="${scoreList}">
+	                    <tr>
+	                    	<td>${score.studentId}</td>
+	                      	<td>${score.title}</td>
+	                      	<td>${score.china}</td>
+	                      	<td>${score.math}</td>
+	                      	<td>${score.english}</td>
+	                      	<td>${score.growthIntegral}</td>
+	                      	<td>${score.active}</td>
+	                      	<td>${score.leader}</td>
 	                    </tr>
                     </c:forEach>
                   </tbody></table>
@@ -362,41 +350,6 @@
 					&times;
 				</button>
 				<h4 class="modal-title" id="myModalLabel">
-					选择文件
-				</h4>
-			</div>
-			<div class="modal-body">
-				<form action="" id="uploadFrom">
-					<input type="file" name="file" id="file">
-				</form>
-				<div class="contentDiv" id="contentDiv">
-					<img alt="选择excel" class="selectImg" src="${ctx}/static/student/images/add.png">
-				</div>
-				<img src="${ctx}/static/student/images/excel.jpg" class="selectExcel">
-				<p class="fileName"></p>
-				<a href="javascript:;">下载模板</a>
-				<div class="clear"></div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
-				</button>
-				<button type="button" class="btn btn-primary" id="batchBtn">
-					确定
-				</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
-</div>
-
-<!-- 批量模态框（Modal） -->
-<div class="modal fade" id="singleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-					&times;
-				</button>
-				<h4 class="modal-title" id="myModalLabel">
 					录入学生信息
 				</h4>
 			</div>
@@ -404,26 +357,22 @@
 			
 				<div class="box box-info">
                 <!-- form start -->
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="uploadFrom">
                   <div class="box-body">
+                  	<input type="file" name="file" id="file">
                     <div class="form-group">
-                      <label for="studentId" class="col-sm-2 control-label">学号</label>
+                      <label for="title" class="col-sm-2 control-label">标题</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="studentId" name="studentId" placeholder="请输入学生学号....">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题....">
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="name" class="col-sm-2 control-label">学生名</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入学生姓名....">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="phone" class="col-sm-2 control-label">家长电话</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入家长电话....">
-                      </div>
-                    </div>
+                    <div class="contentDiv" id="contentDiv">
+						<img alt="选择excel" class="selectImg" src="${ctx}/static/student/images/add.png">
+					</div>
+					<img src="${ctx}/static/student/images/excel.jpg" class="selectExcel">
+					<p class="fileName"></p>
+					<a href="javascript:;">下载模板</a>
+					<div class="clear"></div>
                   </div><!-- /.box-body -->
                 </form>
               </div>
@@ -432,7 +381,7 @@
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
-				<button type="button" class="btn btn-primary" id="singleBtn">
+				<button type="button" class="btn btn-primary" id="batchBtn">
 					确定
 				</button>
 			</div>
@@ -450,8 +399,6 @@
     <!-- AdminLTE App -->
     <script type="text/javascript" src="${ctx}/static/AdminLTE-2.3.0/dist/js/app.min.js"></script>
     <script type="text/javascript" src="${ctx}/static/layer/layer.js"></script>
-    <script type="text/javascript" src="${ctx}/static/jquery/jquery.form.js"></script>
-    <script type="text/javascript" src="${ctx}/static/student/student.js"></script>
 
   </body>
 </html>

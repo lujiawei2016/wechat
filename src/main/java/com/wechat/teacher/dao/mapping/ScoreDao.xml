@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.teacher.dao.mapping.ScoreDao">
+
+	<!-- 查找标题 -->
+	<select id="findScoreTitle" resultType="String">
+		select s.title from score s group by s.title order by s.scoreId desc
+	</select>
+	
+	<!-- 保存学生 -->
+	<insert id="saveScore" parameterType="com.wechat.teacher.po.Score">
+		insert into score
+			(studentId,title,china,math,english,growthIntegral,active,leader,createTime) 
+		values 
+			(#{studentId},#{title},#{china},#{math},#{english},#{growthIntegral},#{active},#{leader},now())
+	</insert>
+	
+	<!-- 根据标题查找成绩 -->
+	<select id="findStudentByTitle" parameterType="String" resultType="com.wechat.teacher.po.Score">
+		select * from score s where s.title=#{title}
+	</select>
+	
+	<!-- 根据标题删除成绩 -->
+	<delete id="deleteScoreByTitle" parameterType="String">
+		delete from score where title=#{title}
+	</delete>
+	
+	<!-- 根据学生id查找学生成绩 -->
+	<select id="findScoreByStudentId" parameterType="String" resultType="com.wechat.teacher.po.Score">
+		select * from score s where s.studentId=#{studentId}
+	</select>
+
+</mapper>

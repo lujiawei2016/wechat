@@ -24,12 +24,12 @@ $(document).ready(function(){
                 	});  
                 },  
                 error: function(){
-                	("#batchModal").modal("hide");
+                	$("#batchModal").modal("hide");
                 	layer.alert("导入成功",{
                 		icon:1
                 	});
                 	setTimeout(function(){
-                		location.reaload();
+                		location.reload();
                 	},2000);
                 }
             });   

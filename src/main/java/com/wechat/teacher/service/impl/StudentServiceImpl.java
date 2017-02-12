@@ -89,4 +89,12 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
+	/**
+	 * 根据微信查找学生信息
+	 */
+	@Override
+	public List<Student> findStudentByWeixin(String weixin) throws Exception {
+		return studentDao.findStudentByWeixin(weixin);
+	}
+
 }

@@ -56,5 +56,16 @@ public interface StudentService {
 	 * @throws Exception
 	 */
 	public String deleteStudent(String studentId) throws Exception;
+
+	/**
+	 * 
+	 * @description     根据微信查找学生信息
+	 * @author          lujiawei
+	 * @data            2017年2月12日 下午11:03:32
+	 * @version         v1.0
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Student> findStudentByWeixin(String weixin) throws Exception;
 	
 }

@@ -87,6 +87,7 @@
     <mvc:interceptors>
     	<mvc:interceptor>
     		<mvc:mapping path="/studentController/**"/>
+    		<mvc:mapping path="/scoreController/**"/>
     		<bean class="com.wechat.teacher.interceptor.SessionInterceptor"></bean>
     	</mvc:interceptor>
     </mvc:interceptors>

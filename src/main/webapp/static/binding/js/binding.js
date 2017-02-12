@@ -64,6 +64,9 @@ $(document).ready(function(){
 											layer.open({
 												content:"绑定成功，正在跳转...."
 											});
+											setTimeout(function(){
+												window.location.href=path+"/parentsController/findStudentByWeixin?weixin="+weixin;
+											},1000);
 										}
 									}
 								});
