@@ -64,6 +64,12 @@ public class Student {
 	public Student() {
 		super();
 	}
+	
+	public Student(String phone, String weixin) {
+		super();
+		this.phone = phone;
+		this.weixin = weixin;
+	}
 
 	public Student(String studentId, String name, String phone) {
 		super();

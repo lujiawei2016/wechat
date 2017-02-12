@@ -249,12 +249,12 @@
                     </tr>
                     <c:forEach var="student" items="${studentList}">
                     	<tr>
-	                      <td>${student.studentId}</td>
+	                      <td class="studentIdTd">${student.studentId}</td>
 	                      <td>${student.name}</td>
 	                      <td>${student.phone}</td>
 	                      <td>
 	                      	<c:choose>
-	                      		<c:when test="${student.weixin == '' || student.weixin eq null}">
+	                      		<c:when test="${empty student.weixin}">
 	                      			<span style="color: red">未绑定</span>
 	                      		</c:when>
 	                      		<c:otherwise>
@@ -262,7 +262,15 @@
 	                      		</c:otherwise>
 	                      	</c:choose>
 	                      </td>
-	                      <td>操作</td>
+	                      <td>
+	                      	<c:choose>
+	                      		<c:when test="${!empty student.weixin}">
+	                      			<a href="javascript:;" class="unbundling">解绑</a>
+	                      		</c:when>
+	                      	</c:choose>
+	                      	<a href="javascript:;" class="delete">删除</a>
+	                      	<a href="javascript:;" class="lookScore">查看成绩</a>
+	                      </td>
 	                    </tr>
                     </c:forEach>
                   </tbody></table>
@@ -375,6 +383,58 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 				</button>
 				<button type="button" class="btn btn-primary" id="batchBtn">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 批量模态框（Modal） -->
+<div class="modal fade" id="singleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					录入学生信息
+				</h4>
+			</div>
+			<div class="modal-body">
+			
+				<div class="box box-info">
+                <!-- form start -->
+                <form class="form-horizontal">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="studentId" class="col-sm-2 control-label">学号</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="studentId" name="studentId" placeholder="请输入学生学号....">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="name" class="col-sm-2 control-label">学生名</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="请输入学生姓名....">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="phone" class="col-sm-2 control-label">家长电话</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入家长电话....">
+                      </div>
+                    </div>
+                  </div><!-- /.box-body -->
+                </form>
+              </div>
+			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" id="singleBtn">
 					确定
 				</button>
 			</div>

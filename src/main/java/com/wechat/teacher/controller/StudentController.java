@@ -86,5 +86,66 @@ public class StudentController {
           
         return "文件导入成功！";
 
-    }  
+    }
+	
+	/**
+	 * 
+	 * @description     保存学生
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午9:31:41
+	 * @version         v1.0
+	 * @return
+	 */
+	@RequestMapping("/saveStudent")
+	@ResponseBody
+	public String saveStudent(Student student){
+		String result = "";
+		try {
+			result = studentService.saveStudent(student);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @description     解除绑定
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:13:06
+	 * @version         v1.0
+	 * @return
+	 */
+	@RequestMapping("/unbundling")
+	@ResponseBody
+	public String unbundling(String studentId){
+		String result = "";
+		try {
+			result = studentService.unbundling(studentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @description     删除学生
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:42:22
+	 * @version         v1.0
+	 * @param studentId
+	 * @return
+	 */
+	@RequestMapping("/deleteStudent")
+	@ResponseBody
+	public String deleteStudent(String studentId){
+		String result = "";
+		try {
+			result = studentService.deleteStudent(studentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

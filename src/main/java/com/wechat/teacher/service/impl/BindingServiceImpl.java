@@ -3,11 +3,12 @@ package com.wechat.teacher.service.impl;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wechat.teacher.dao.mapping.BindingDao;
+import com.wechat.teacher.dao.mapping.StudentDao;
 import com.wechat.teacher.po.Student;
 import com.wechat.teacher.service.BindingService;
 
@@ -23,8 +24,10 @@ import com.wechat.teacher.service.BindingService;
 @Transactional
 public class BindingServiceImpl implements BindingService {
 	
+	private static final Logger logger = Logger.getLogger(BindingServiceImpl.class);
+	
 	@Autowired
-	private BindingDao bindingDao;
+	private StudentDao studentDao;
 
 	/**
 	 * 
@@ -35,8 +38,8 @@ public class BindingServiceImpl implements BindingService {
 	 * @return
 	 */
 	@Override
-	public List<Student> findStudentByWeixin(String weixin) {
-		List<Student> studentList = bindingDao.findStudentByWeixin(weixin);
+	public List<Student> findStudentByWeixin(String weixin) throws Exception {
+		List<Student> studentList = studentDao.findStudentByWeixin(weixin);
 		return studentList;
 	}
 
@@ -49,14 +52,14 @@ public class BindingServiceImpl implements BindingService {
 	 * @return
 	 */
 	@Override
-	public List<Student> findStudentByPhone(String phone) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Student> findStudentByPhone(String phone) throws Exception {
+		List<Student> studentList = studentDao.findStudentByPhone(phone);
+		return studentList;
 	}
 
 	/**
 	 * 
-	 * @Description  将微信和手机号码绑定
+	 * @Description  判断手机号码是否能绑定
 	 * @author       lujiawei
 	 * @date         2017年2月9日 上午10:03:17
 	 * @param weixin
@@ -64,7 +67,7 @@ public class BindingServiceImpl implements BindingService {
 	 * @return
 	 */
 	@Override
-	public String bindWeixinPhone(String weixin, String phone) {
+	public String bindWeixinPhone(String weixin, String phone) throws Exception {
 		if(StringUtils.isBlank(weixin)){
 			//微信号为空
 			return "1";
@@ -73,13 +76,45 @@ public class BindingServiceImpl implements BindingService {
 			return "2";
 		}else{
 			List<Student> studentList = findStudentByPhone(phone);
-			if(studentList.size() == 0){
+			if(studentList == null || studentList.size() == 0){
 				//手机号码不存在
 				return "3";
 			}else{
 				Student student = studentList.get(0);
 				if(StringUtils.isBlank(student.getWeixin())){
 					//可以绑定
+					return "{\"name\":\""+student.getName()+"\"}";
+				}else{
+					//该学生已经被绑定
+					return "4";
+				}
+			}
+		}
+	}
+
+	/**
+	 * 将微信和学生绑定
+	 */
+	@Override
+	public String bindStudent(String weixin, String phone) throws Exception {
+		if(StringUtils.isBlank(weixin)){
+			//微信号为空
+			return "1";
+		}else if(StringUtils.isBlank(phone)){
+			//电话号码为空
+			return "2";
+		}else{
+			List<Student> studentList = findStudentByPhone(phone);
+			if(studentList == null || studentList.size() == 0){
+				//手机号码不存在
+				return "3";
+			}else{
+				Student student = studentList.get(0);
+				if(StringUtils.isBlank(student.getWeixin())){
+					//可以绑定
+					Student bingdingStudent = new Student(phone, weixin);
+					studentDao.setWeixinPhone(bingdingStudent);
+					logger.info(phone+"绑定成功");
 					return "4";
 				}else{
 					//该学生已经被绑定

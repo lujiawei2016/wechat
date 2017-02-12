@@ -34,4 +34,27 @@ public interface StudentService {
 	 */
 	public String saveStudent(Student student) throws Exception;
 	
+	/**
+	 * 
+	 * @description     解绑
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:18:39
+	 * @version         v1.0
+	 * @param studentId
+	 * @return
+	 * @throws Exception
+	 */
+	public String unbundling(String studentId) throws Exception;
+	
+	/**
+	 * 
+	 * @description     删除学生信息
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:43:25
+	 * @version         v1.0
+	 * @return
+	 * @throws Exception
+	 */
+	public String deleteStudent(String studentId) throws Exception;
+	
 }

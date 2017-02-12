@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wechat.teacher.dao.mapping.StudentDao">
+
+	<!-- 根据id查找学生 -->
+	<select id="findStudentById" parameterType="String" resultType="com.wechat.teacher.po.Student">
+		select * from student s where s.studentId=#{studentId}
+	</select>
+	
+	<!-- 查找所有学生 -->
+	<select id="findAllStudent" resultType="com.wechat.teacher.po.Student">
+		select * from student s order by s.createTime desc
+	</select>
+	
+	<!-- 保存学生信息 -->
+	<insert id="saveStudent" parameterType="com.wechat.teacher.po.Student">
+		insert into student(studentId,name,phone,createTime) values(#{studentId},#{name},#{phone},now())
+	</insert>
+	
+	<!-- 将微信设置为Null -->
+	<update id="setWeixinNull" parameterType="String">
+		update student s set s.weixin=null where s.studentId=#{studentId}
+	</update>
+	
+	<!-- 根据id删除学生 -->
+	<delete id="deleteStudentById" parameterType="String">
+		delete from student where studentId=#{studentId}
+	</delete>
+	
+	<!-- 将微信和手机号绑定 -->
+	<update id="setWeixinPhone" parameterType="com.wechat.teacher.po.Student">
+		update student s set s.weixin=#{weixin} where s.phone=#{phone}
+	</update>
+	
+	<!-- 根据微信查找学生 -->
+	<select id="findStudentByWeixin" parameterType="String" resultType="com.wechat.teacher.po.Student">
+		select * from student s where s.weixin=#{weixin}
+	</select>
+	
+	<!-- 根据电话查找学生 -->
+	<select id="findStudentByPhone" parameterType="String" resultType="com.wechat.teacher.po.Student">
+		select * from student s where s.phone=#{phone}
+	</select>
+	
+</mapper>

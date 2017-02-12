@@ -53,4 +53,40 @@ public class StudentServiceImpl implements StudentService {
 		}
 	}
 
+	/**
+	 * 解绑微信
+	 */
+	@Override
+	public String unbundling(String studentId) throws Exception {
+		Student student = studentDao.findStudentById(studentId);
+		if(student == null){
+			//解绑失败
+			logger.info(studentId+"解绑失败");
+			return "1";
+		}else{
+			//解绑成功
+			studentDao.setWeixinNull(studentId);
+			logger.info(studentId+"解绑成功");
+			return "2";
+		}
+	}
+
+	/**
+	 * 删除学生信息
+	 */
+	@Override
+	public String deleteStudent(String studentId) throws Exception {
+		Student student = studentDao.findStudentById(studentId);
+		if(student == null){
+			//删除失败
+			logger.info(studentId+"删除成功");
+			return "1";
+		}else{
+			//删除成功
+			studentDao.deleteStudentById(studentId);
+			logger.info(studentId+"删除成功");
+			return "2";
+		}
+	}
+
 }

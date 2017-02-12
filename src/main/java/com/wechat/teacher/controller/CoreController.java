@@ -82,6 +82,7 @@ public class CoreController {
 			String content = "";
 			if("text".equals(msgType)){
 				content = map.get("Content");
+				logger.info(map.get("FromUserName")+" 发送 "+content);
 				if("绑定".equals(content)){
 					url = url + "?weixin="+map.get("FromUserName");
 					textMessage.setContent("<a href='"+url+"'>点击绑定</a>");

@@ -7,6 +7,11 @@ $(document).ready(function(){
 		$("#batchModal").modal("show");
 	});
 	
+	//点击单击添加按钮
+	$("#singleAdd").click(function(){
+		$("#singleModal").modal("show");
+	});
+	
 	//点击批量添加按钮确定
 	$("#batchBtn").click(function(){
 		if(checkData()){  
@@ -29,6 +34,40 @@ $(document).ready(function(){
                 }
             });   
         }  
+	});
+	
+	//点击单独添加确定按钮
+	$("#singleBtn").click(function(){
+		var studentId = $("#studentId").val();
+		var name = $("#name").val();
+		var phone = $("#phone").val();
+		$.ajax({
+			url:path+"/studentController/saveStudent",
+			data:{"studentId":studentId,"name":name,"phone":phone},
+			dataType:"json",
+			type:"post",
+			beforeSend:function(){
+				$("#singleModal").modal("hide");
+				layer.load(1);
+			},
+			success:function(result){
+				layer.closeAll();
+				if("1" == result){
+					layer.alert("保存成功",{
+						icon:1
+					});
+				}else{
+					layer.alert("保存失败",{
+						icon:2
+					});
+				}
+			},
+			error:function(){
+				layer.alert("保存失败",{
+					icon:2
+				});
+			}
+		});
 	});
 	
 	//点击选择excel
@@ -71,5 +110,83 @@ $(document).ready(function(){
            return false;  
        }  
        return true;  
-    }  
+    }
+    
+    //点击解绑
+    $(".unbundling").click(function(){
+    	var studentId = $(this).parent().siblings(".studentIdTd").html();
+    	layer.confirm("确定解绑？",{
+    		icon:0,
+    		btn:["确定","取消"]
+    	},function(){
+    		$.ajax({
+        		url:path+"/studentController/unbundling",
+        		data:{"studentId":studentId},
+        		dataType:"json",
+        		type:"post",
+        		beforeSend:function(){
+        			layer.load(1);
+        		},
+        		success:function(result){
+        			layer.closeAll();
+        			if("2" == result){
+        				layer.alert("解绑成功",{
+        					icon:1
+        				});
+        				setTimeout(function(){
+        					location.reload();
+        				},2000);
+        			}else{
+        				layer.alert("解绑失败",{
+        					icon:2
+        				});
+        			}
+        		},
+        		error:function(){
+        			layer.alert("解绑异常，请与管理员联系",{
+    					icon:2
+    				});
+        		}
+        	});
+    	});
+    });
+    
+    //点击删除按钮
+    $(".delete").click(function(){
+    	var studentId = $(this).parent().siblings(".studentIdTd").html();
+    	layer.confirm("确定删除？",{
+    		icon:0,
+    		btn:["确定","取消"]
+    	},function(){
+    		$.ajax({
+        		url:path+"/studentController/deleteStudent",
+        		data:{"studentId":studentId},
+        		dataType:"json",
+        		type:"post",
+        		beforeSend:function(){
+        			layer.load(1);
+        		},
+        		success:function(result){
+        			layer.closeAll();
+        			if("2" == result){
+        				layer.alert("删除成功",{
+        					icon:1
+        				});
+        				setTimeout(function(){
+        					location.reload();
+        				},2000);
+        			}else{
+        				layer.alert("删除失败",{
+        					icon:2
+        				});
+        			}
+        		},
+        		error:function(){
+        			layer.alert("删除异常，请与管理员联系",{
+    					icon:2
+    				});
+        		}
+        	});
+    	});
+    });
 });

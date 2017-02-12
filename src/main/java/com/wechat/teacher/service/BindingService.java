@@ -22,7 +22,7 @@ public interface BindingService {
 	 * @param weixin
 	 * @return
 	 */
-	public List<Student> findStudentByWeixin(String weixin);
+	public List<Student> findStudentByWeixin(String weixin) throws Exception;
 	
 	/**
 	 * 
@@ -32,16 +32,28 @@ public interface BindingService {
 	 * @param phone
 	 * @return
 	 */
-	public List<Student> findStudentByPhone(String phone);
+	public List<Student> findStudentByPhone(String phone) throws Exception;
 	
 	/**
 	 * 
-	 * @Description  将微信和手机号码绑定
+	 * @Description  判断手机号码是否能绑定
 	 * @author       lujiawei
 	 * @date         2017年2月9日 上午10:03:17
 	 * @param weixin
 	 * @param phone
 	 * @return
 	 */
-	public String bindWeixinPhone(String weixin,String phone);
+	public String bindWeixinPhone(String weixin,String phone) throws Exception;
+	
+	/**
+	 * 
+	 * @description     将微信和学生绑定
+	 * @author          lujiawei
+	 * @data            2017年2月12日 上午12:33:41
+	 * @version         v1.0
+	 * @param weixin
+	 * @param phone
+	 * @return
+	 */
+	public String bindStudent(String weixin,String phone) throws Exception;
 }

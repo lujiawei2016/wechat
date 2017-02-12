@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
- "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
- <mapper namespace="com.wechat.teacher.dao.mapping.BindingDao">
- 	<select id="findStudentByWeixin" parameterType="String" resultType="com.wechat.teacher.po.Student">
- 		select * from student s where s.weixin=#{weixin}
- 	</select>
- </mapper>

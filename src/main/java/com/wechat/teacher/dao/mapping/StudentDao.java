@@ -43,4 +43,57 @@ public interface StudentDao {
 	 * @param student
 	 */
 	public void saveStudent(Student student);
+	
+	/**
+	 * 
+	 * @description     将微信设置为空
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:14:22
+	 * @version         v1.0
+	 * @param studentId
+	 */
+	public void setWeixinNull(String studentId);
+	
+	/**
+	 * 
+	 * @description     根据studentId删除学生
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午10:45:14
+	 * @version         v1.0
+	 * @param studentId
+	 */
+	public void deleteStudentById(String studentId);
+	
+	/**
+	 * 
+	 * @description     将微信和手机号绑定
+	 * @author          lujiawei
+	 * @data            2017年2月11日 下午11:02:30
+	 * @version         v1.0
+	 * @param weixin
+	 * @param phone
+	 */
+	public void setWeixinPhone(Student student);
+	
+	/**
+	 * 
+	 * @description     根据微信查找学生
+	 * @author          lujiawei
+	 * @data            2017年2月12日 上午9:47:07
+	 * @version         v1.0
+	 * @param weixin
+	 * @return
+	 */
+	public List<Student> findStudentByWeixin(String weixin);
+	
+	/**
+	 * 
+	 * @description     根据电话查找学生
+	 * @author          lujiawei
+	 * @data            2017年2月12日 上午9:50:05
+	 * @version         v1.0
+	 * @param phone
+	 * @return
+	 */
+	public List<Student> findStudentByPhone(String phone);
 }
