@@ -67,7 +67,7 @@ public class CoreController {
 			HttpServletRequest request,HttpServletResponse response){
 		
 		String returnStr = "";  //需要返回的值
-		String url = request.getScheme() +"://" + request.getServerName() + ":" +request.getServerPort() + "/wechat/bindingController/jumpBinding";
+		String url = request.getScheme() +"://" + request.getServerName() + ":" +request.getServerPort();
 
 		try {
 			Map<String, String> map = weixinService.parseXml(request);
@@ -84,10 +84,15 @@ public class CoreController {
 				content = map.get("Content");
 				logger.info(map.get("FromUserName")+" 发送 "+content);
 				if("绑定".equals(content)){
-					url = url + "?weixin="+map.get("FromUserName");
+					url = url + "/wechat/bindingController/jumpBinding?weixin="+map.get("FromUserName");
 					textMessage.setContent("<a href='"+url+"'>点击绑定</a>");
-					returnStr = weixinService.textMessageToXml(textMessage);
+				}else if("查询成绩".equals(content)){
+					url = url + "/wechat/parentsController/findStudentByWeixin?weixin="+map.get("FromUserName");
+					textMessage.setContent("<a href='"+url+"'>点击查询</a>");
+				}else{
+					textMessage.setContent("如有问题，请与黎老师联系....");
 				}
+				returnStr = weixinService.textMessageToXml(textMessage);
 			}else{
 				//暂时只支持文本类型，不支持其他类型
 				textMessage.setContent("暂时不支持此类型消息");

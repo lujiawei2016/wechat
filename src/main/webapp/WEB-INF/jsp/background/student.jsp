@@ -374,7 +374,7 @@
 				</div>
 				<img src="${ctx}/static/student/images/excel.jpg" class="selectExcel">
 				<p class="fileName"></p>
-				<a href="javascript:;">下载模板</a>
+				<a href="${ctx}/studentController/downloadStudentTemplate">下载模板</a>
 				<div class="clear"></div>
 			</div>
 			<div class="modal-footer">

@@ -41,6 +41,25 @@ $(document).ready(function(){
 		var studentId = $("#studentId").val();
 		var name = $("#name").val();
 		var phone = $("#phone").val();
+		if(studentId == "" || studentId == null){
+			layer.alert("学生id不能为空",{
+				icon:2
+			});
+			return;
+		}
+		if(name == "" || name == null){
+			layer.alert("学生名字不能为空",{
+				icon:2
+			});
+			return;
+		}
+		if(phone == "" || phone == null){
+			layer.alert("家长电话不能为空",{
+				icon:2
+			});
+			return;
+		}
+		
 		$.ajax({
 			url:path+"/studentController/saveStudent",
 			data:{"studentId":studentId,"name":name,"phone":phone},

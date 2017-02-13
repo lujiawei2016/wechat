@@ -3,6 +3,7 @@ package com.wechat.teacher.service;
 import java.util.List;
 
 import com.wechat.teacher.po.Score;
+import com.wechat.teacher.vo.ScoreVo;
 
 /**
  * 
@@ -51,7 +52,7 @@ public interface ScoreService {
 	 * @param title
 	 * @return
 	 */
-	public List<Score> findStudentByTitle(String title);
+	public List<ScoreVo> findStudentByTitle(String title);
 	
 	/**
 	 * 

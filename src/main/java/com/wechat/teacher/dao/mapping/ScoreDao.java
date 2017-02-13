@@ -3,6 +3,7 @@ package com.wechat.teacher.dao.mapping;
 import java.util.List;
 
 import com.wechat.teacher.po.Score;
+import com.wechat.teacher.vo.ScoreVo;
 
 /**
  * 
@@ -42,7 +43,7 @@ public interface ScoreDao {
 	 * @param title
 	 * @return
 	 */
-	public List<Score> findStudentByTitle(String title);
+	public List<ScoreVo> findStudentByTitle(String title);
 
 	/**
 	 * 

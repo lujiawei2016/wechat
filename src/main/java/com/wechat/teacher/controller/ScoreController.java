@@ -16,7 +16,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wechat.teacher.po.Score;
 import com.wechat.teacher.service.ScoreService;
+import com.wechat.teacher.utils.FileOperateUtil;
 import com.wechat.teacher.utils.ImportExcelUtil;
+import com.wechat.teacher.vo.ScoreVo;
 
 /**
  * 
@@ -97,7 +99,7 @@ public class ScoreController {
 	@RequestMapping("/lookScore")
 	public String lookScore(String title,ModelMap modelMap) throws Exception{
 		title = new String(title.getBytes("ISO-8859-1"), "UTF-8");
-		List<Score> scoreList = scoreService.findStudentByTitle(title);
+		List<ScoreVo> scoreList = scoreService.findStudentByTitle(title);
 		modelMap.put("scoreList", scoreList);
 		return "WEB-INF/jsp/background/lookScore";
 	}
@@ -116,5 +118,16 @@ public class ScoreController {
 	public String deleteScoreByTitle(String title){
 		String result = scoreService.deleteScoreByTitle(title);
 		return result;
+	}
+	
+	/**
+	 * 
+	 * @Description  下文成绩模板
+	 * @author       lujiawei
+	 * @date         2017年2月13日 上午9:42:37
+	 */
+	@RequestMapping("/downloadScoreTemplate")
+	public void downloadScoreTemplate(HttpServletRequest request,HttpServletResponse response){
+		FileOperateUtil.FilesDownload_stream(request, response, "/static/template/score.xlsx");
 	}
 }

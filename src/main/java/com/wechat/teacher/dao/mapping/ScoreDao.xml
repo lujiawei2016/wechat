@@ -17,9 +17,24 @@
 	</insert>
 	
 	<!-- 根据标题查找成绩 -->
-	<select id="findStudentByTitle" parameterType="String" resultType="com.wechat.teacher.po.Score">
-		select * from score s where s.title=#{title}
+	<select id="findStudentByTitle" parameterType="String" resultMap="findStudentByTitleMap">
+		select 
+			st.name as studentName,so.scoreId,so.studentId,so.title,so.china,so.math,so.english,so.growthIntegral,so.active,so.leader
+		from student st,score so 
+		where st.studentId=so.studentId and so.title=#{title}
 	</select>
+	<resultMap type="com.wechat.teacher.vo.ScoreVo" id="findStudentByTitleMap">
+		<id property="scoreId" column="scoreId"/>
+		<result property="studentId" column="studentId"/>
+		<result property="title" column="title"/>
+		<result property="china" column="china"/>
+		<result property="math" column="math"/>
+		<result property="english" column="english"/>
+		<result property="growthIntegral" column="growthIntegral"/>
+		<result property="active" column="active"/>
+		<result property="leader" column="leader"/>
+		<result property="studentName" column="name"/>
+	</resultMap>
 	
 	<!-- 根据标题删除成绩 -->
 	<delete id="deleteScoreByTitle" parameterType="String">

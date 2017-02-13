@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.wechat.teacher.po.Student;
 import com.wechat.teacher.service.StudentService;
+import com.wechat.teacher.utils.FileOperateUtil;
 import com.wechat.teacher.utils.ImportExcelUtil;
 
 /**
@@ -147,5 +148,18 @@ public class StudentController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	
+	/**
+	 * 
+	 * @Description  下载模板
+	 * @author       lujiawei
+	 * @date         2017年2月13日 上午9:37:26
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/downloadStudentTemplate")
+	public void downloadStudentTemplate(HttpServletRequest request, HttpServletResponse response){
+		FileOperateUtil.FilesDownload_stream(request, response, "/static/template/student.xlsx");
 	}
 }

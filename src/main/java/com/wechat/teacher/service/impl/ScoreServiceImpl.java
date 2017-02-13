@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wechat.teacher.dao.mapping.ScoreDao;
 import com.wechat.teacher.po.Score;
 import com.wechat.teacher.service.ScoreService;
+import com.wechat.teacher.vo.ScoreVo;
 
 /**
  * 
@@ -51,7 +52,7 @@ public class ScoreServiceImpl implements ScoreService {
 	 * 根据标题查找学生
 	 */
 	@Override
-	public List<Score> findStudentByTitle(String title) {
+	public List<ScoreVo> findStudentByTitle(String title) {
 		return scoreDao.findStudentByTitle(title);
 	}
 

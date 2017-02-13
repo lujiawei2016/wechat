@@ -364,7 +364,7 @@
 					</div>
 					<img src="${ctx}/static/student/images/excel.jpg" class="selectExcel">
 					<p class="fileName"></p>
-					<a href="javascript:;">下载模板</a>
+					<a href="${ctx}/scoreController/downloadScoreTemplate">下载模板</a>
 					<div class="clear"></div>
                   </div><!-- /.box-body -->
                 </form>

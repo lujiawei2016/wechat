@@ -240,6 +240,7 @@
                     <tr>
                       <th>学号</th>
                       <th>标题</th>
+                      <th>姓名</th>
                       <th>语文</th>
                       <th>数学</th>
                       <th>英语</th>
@@ -251,6 +252,7 @@
 	                    <tr>
 	                    	<td>${score.studentId}</td>
 	                      	<td>${score.title}</td>
+	                      	<td>${score.studentName}</td>
 	                      	<td>${score.china}</td>
 	                      	<td>${score.math}</td>
 	                      	<td>${score.english}</td>
