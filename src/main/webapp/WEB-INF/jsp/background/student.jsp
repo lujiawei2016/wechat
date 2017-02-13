@@ -267,7 +267,7 @@
 	                      		</c:when>
 	                      	</c:choose>
 	                      	<a href="javascript:;" class="delete">删除</a>
-	                      	<a href="javascript:;" class="lookScore">查看成绩</a>
+	                      	<a href="${ctx}/studentController/lookScore?studentId=${student.studentId}&studentName=${student.name}" class="lookScore">查看成绩</a>
 	                      </td>
 	                    </tr>
                     </c:forEach>

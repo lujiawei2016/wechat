@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.wechat.teacher.po.Score;
 import com.wechat.teacher.po.Student;
+import com.wechat.teacher.service.ScoreService;
 import com.wechat.teacher.service.StudentService;
 import com.wechat.teacher.utils.FileOperateUtil;
 import com.wechat.teacher.utils.ImportExcelUtil;
@@ -32,6 +34,9 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService studentService;
+	
+	@Autowired
+	private ScoreService scoreService;
 
 	/**
 	 * 
@@ -161,5 +166,29 @@ public class StudentController {
 	@RequestMapping("/downloadStudentTemplate")
 	public void downloadStudentTemplate(HttpServletRequest request, HttpServletResponse response){
 		FileOperateUtil.FilesDownload_stream(request, response, "/static/template/student.xlsx");
+	}
+
+	/**
+	 * 
+	 * @description     查看学成成绩
+	 * @author          lujiawei
+	 * @data            2017年2月13日 下午9:59:17
+	 * @version         v1.0
+	 * @param studentId
+	 * @param studentName
+	 * @param modelMap
+	 * @return
+	 */
+	@RequestMapping("/lookScore")
+	public String lookScore(String studentId,String studentName,ModelMap modelMap) throws Exception{
+		studentId = new String(studentId.getBytes("ISO-8859-1"),"UTF-8");
+		studentName = new String(studentName.getBytes("ISO-8859-1"),"UTF-8");
+		
+		List<Score> scoreList = scoreService.findScoreByStudentId(studentId);
+		
+		modelMap.put("studentName", studentName);
+		modelMap.put("scoreList", scoreList);
+		
+		return "WEB-INF/jsp/background/studentScore";
 	}
 }

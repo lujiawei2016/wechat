@@ -43,7 +43,7 @@
 	
 	<!-- 根据学生id查找学生成绩 -->
 	<select id="findScoreByStudentId" parameterType="String" resultType="com.wechat.teacher.po.Score">
-		select * from score s where s.studentId=#{studentId}
+		select * from score s where s.studentId=#{studentId} order by s.createTime desc
 	</select>
 
 </mapper>
